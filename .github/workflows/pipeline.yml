@@ -33,14 +33,14 @@ jobs:
         
       - name: step 1 - Add artifacts to publish to the temp folder
         run:
-          mkdir downloads
-          mv data/data_raw.csv /downloads
-          mv data/data_clean.csv /downloads
-          cd downloads
+          #mkdir downloads
+          #mv data/data_raw.csv /downloads
+          #mv data/data_clean.csv /downloads
+          cd data
           cd ..
     
       - name: Create Artifacts
         uses: actions/upload-artifact@v2
         with: 
           name: assets-for-download
-          path: downloads
+          path: data
