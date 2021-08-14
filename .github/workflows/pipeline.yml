@@ -1,0 +1,44 @@
+name: german-bl-pipeline
+
+on: [push]
+
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml-py3:latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run Model Pipeline
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          # Get DVC 1.0 
+          #pip install dvc[s3]
+          
+          # install requirements
+          pip install -r requirements.txt
+          # mkdir downloads
+          # run Data Preparation
+          python ./src/download_data.py
+          python ./src/clean_data.py
+
+      #- name: Step 1 - Create a temporary artifact downloads folder
+        #run: 
+         # mkdir downloads
+          
+        
+      #- name: step 2 - Add artifacts to publish to the temp folder
+       # run: 
+         # mv finalized_model.sav /downloads
+          #cd downloads
+          #cd ..
+    
+ #     - name: Create Artifacts
+  #      uses: actions/upload-artifact@v2
+   #     with: 
+    #      name: assets-for-download
+     #     path: downloads
