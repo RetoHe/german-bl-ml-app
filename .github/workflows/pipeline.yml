@@ -21,7 +21,7 @@ jobs:
           
           # install requirements
           pip install -r requirements.txt
-          mkdir downloads
+          #mkdir downloads
           # run Data Preparation
           python ./src/download_data.py
           python ./src/clean_data.py
@@ -32,7 +32,8 @@ jobs:
           
         
       - name: step 1 - Add artifacts to publish to the temp folder
-        run: 
+        run:
+          mkdir downloads
           mv data/data_raw.csv /downloads
           mv data/data_clean.csv /downloads
           cd downloads
